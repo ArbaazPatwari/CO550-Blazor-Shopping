@@ -1,7 +1,7 @@
 ﻿@using BlazorServerApp.Services
 @* UI Section *@
 
-<h3>You have @Items.Count items in your shopping cart</h3>
+<h3>You have @itemCount items in your shopping cart</h3>
 
 <br/>
 
@@ -46,6 +46,8 @@
     [Parameter]
     public EventCallback<MouseEventArgs> OnItemsChanged { get; set; }
 
+    private int itemCount { get; set; } = 0;
+
     protected override void OnInitialized()
     {
         OnQuantityChanged();
@@ -54,5 +56,6 @@
     private void OnQuantityChanged()
     {
         totalCost = @Items.Sum(item => item.PurchasePrice * item.Quantity);
+        itemCount = @Items.Sum(item => item.Quantity);
     }
 }
